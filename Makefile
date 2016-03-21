@@ -373,11 +373,15 @@ LINUXINCLUDE    := \
 
 KBUILD_CPPFLAGS := -D__KERNEL__
 
+FRANKEN_CFLAGS := -fgcse-lm -fgcse-sm -fsched-spec-load -ffast-math \
+		-fsingle-precision-constant -fno-delete-null-pointer-checks \
+		-mtune=cortex-a7 -march=armv7-a -mfpu=neon-vfpv4
+
 KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
 		   -Werror-implicit-function-declaration \
-		   -Wno-format-security \
-		   -fno-delete-null-pointer-checks
+		   -Wno-format-security $(FRANKEN_CFLAGS)
+
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
 KBUILD_AFLAGS   := -D__ASSEMBLY__
